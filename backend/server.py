@@ -26,15 +26,15 @@ class User(Document):
     use_dot_notation = True
 
 
-class Patient(Document):
-    __collection__ = 'cfd'
-    structure = {
-        'email': unicode,
-        'tablets' list
-    }
-    required_fields = ['email', 'tablets']
-    default_values = {'doctor': False}
-    use_dot_notation = True
+# class Patient(Document):
+#     __collection__ = 'cfd'
+#     structure = {
+#         'email': unicode,
+#         'tablets' list
+#     }
+#     required_fields = ['email', 'tablets']
+#     default_values = {'doctor': False}
+#     use_dot_notation = True
 
 
 conn = MongoKit(app)
