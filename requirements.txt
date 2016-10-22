@@ -1,3 +1,4 @@
 Flask-MongoKit
 pymongo==2.8
 requests
+Bcrypt
