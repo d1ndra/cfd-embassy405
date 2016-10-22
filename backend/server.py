@@ -1,6 +1,9 @@
+#!/usr/bin/python
+
 import json
 from datetime import datetime
 from flask import Flask, render_template, redirect, request, jsonify
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mongokit import MongoKit, Document
 from flask_bcrypt import Bcrypt
 import requests
@@ -54,9 +57,35 @@ def user():
             res['message'] = 'User already registered'
             return jsonify(res)
         else:
-            data['password'] = bcrypt.generate_password_hash(data['password'])
+            data['password'] = generate_password_hash(data['password'])
             collection.insert(data)
             return jsonify({"success":True})
+
+@app.route("/login", methods = ['POST'])
+def login():
+    if request.headers.get(_cfd_header) != app_key:
+        return "Unauthorised"
+    collection = conn['cfd'].users  
+    data = request.get_json()
+    query = {}
+    options = []
+    options.append({'email':data['email']})
+    query["$or"] = options
+    db_data = list(collection.find(query, {"_id":0}))
+    res = {}
+    res['success'] = False
+    if len(db_data) == 0:
+        res['message'] = "User not found"
+        return jsonify(res)
+    else:
+        print db_data[0], data['password']
+        if check_password_hash(str(db_data[0]['password']), str(data['password'])):
+            res['success'] = True
+            return jsonify(res)
+        else:
+            res['message'] = "Bad password"
+            return jsonify(res)
+
 
 @app.route('/user/<email>')
 def user_detail(email):
