@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mongokit import MongoKit, Document
-from flask_bcrypt import Bcrypt
+# from flask_bcrypt import Bcrypt
 import requests
 
 app = Flask(__name__)
