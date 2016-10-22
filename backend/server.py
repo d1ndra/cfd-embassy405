@@ -5,11 +5,10 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mongokit import MongoKit, Document
-# from flask_bcrypt import Bcrypt
+
 import requests
 
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 app_key = '$2b$12$BYDebu0UIJwb05N8BfwPEOZDJDxJGHrAx7JzqIC6NLP0GUrn1hBmO'
 _cfd_header = 'cfd-embassy'
 
