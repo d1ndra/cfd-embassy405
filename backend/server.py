@@ -176,7 +176,7 @@ def patient():
             patient = {}
             patient['email'] = data['patient']
             patient['doctor'] = data['email']
-            patient_coll.save()
+            patient_coll.insert(patient)
             return jsonify({'success':True})
         else:
             return jsonify({'success':False, 'message':'Patient already exists'})
