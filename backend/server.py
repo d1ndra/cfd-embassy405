@@ -279,9 +279,9 @@ def medicine():
     if request.method == 'GET':
         res = []
         meds = list(collection.find({}, {'_id':0}))
-        for med in meds:
-            res.append(med['name'])
-        return jsonify(res)
+        # for med in meds:
+        #     res.append(med['name'])
+        return jsonify(meds)
     else:
         data = json.loads(request.get_json())
         print data['name']
