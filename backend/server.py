@@ -271,7 +271,7 @@ def user_detail(email):
     else:
         return jsonify(result[0])
 
-@app.route('/medicine', methods = ['GET', 'POST'])
+@app.route('/medicine', methods = ['POST', 'GET'])
 def medicine():
     if request.headers.get(_cfd_header) != app_key:
         return "Unauthorised"
